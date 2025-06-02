@@ -176,7 +176,10 @@ func (r *ipblockResource) Update(ctx context.Context, req resource.UpdateRequest
 		return
 	}
 
-	updateQuery := IPBlockModelToIPBlockQuery(plan)
+	updateQueryBuilder := IPBlockModelToIPBlockQuery(plan).Builder()
+	updateQueryBuilder.SkipReserveFirstN(true)
+
+	updateQuery := updateQueryBuilder.Build()
 
 	var ipblock models.IpBlock
 	err := r.client.UpdateResource("ipblock", plan.ID.ValueInt64(), updateQuery, &ipblock)

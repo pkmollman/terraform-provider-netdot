@@ -36,3 +36,4 @@ website/vendor
 
 playground.go
 playground.go.ignore
+terraform-provider-netdot

@@ -27,6 +27,8 @@ type IpBlockQuery struct {
 	VLANID                 *int64  `url:"vlan"`
 	SkipInheritParentOwner *int64  `url:"skip_inherit_parent_owner,omitempty"`
 	SkipReserveFirstN      *int64  `url:"skip_reserve_first_n,omitempty"`
+	SkipUpdateTree         *int64  `url:"no_update_tree,omitempty"`
+	Validate               *int64  `url:"validate,omitempty"`
 }
 
 func (q IpBlockQuery) Builder() IpBlockQueryBuilder {
@@ -52,6 +54,18 @@ func (b *IpBlockQueryBuilder) SkipInheritParentOwner(skip bool) *IpBlockQueryBui
 func (b *IpBlockQueryBuilder) SkipReserveFirstN(skip bool) *IpBlockQueryBuilder {
 	boolInt := boolToInt(skip)
 	b.query.SkipReserveFirstN = &boolInt
+	return b
+}
+
+func (b *IpBlockQueryBuilder) SkipUpdateTree(skip bool) *IpBlockQueryBuilder {
+	boolInt := boolToInt(skip)
+	b.query.SkipUpdateTree = &boolInt
+	return b
+}
+
+func (b *IpBlockQueryBuilder) Validate(validate bool) *IpBlockQueryBuilder {
+	boolInt := boolToInt(validate)
+	b.query.Validate = &boolInt
 	return b
 }
 
